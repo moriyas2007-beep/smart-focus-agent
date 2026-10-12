@@ -15,7 +15,26 @@ if not api_key and "GEMINI_API_KEY" in st.secrets:
     api_key = st.secrets["GEMINI_API_KEY"]
 
 st.set_page_config(page_title="Smart Focus Agent", page_icon="⚡", layout="centered")
+import streamlit as st
 
+# הגדרת עיצוב כללי לסידור טקסט בעברית ומניעת שבירת אותיות
+st.markdown("""
+    <style>
+    /* הגדרת RTL ומניעת כיווץ מילים לאותיות אנכיות */
+    html, body, [class*="css"], div {
+        direction: rtl;
+        text-align: right;
+        white-space: normal;
+        word-break: keep-all !important;
+        overflow-wrap: break-word;
+    }
+    
+    /* מניעת רוחב קבוע צר במובייל */
+    .element-container, .stMarkdown {
+        width: 100% !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
 # --- Helper Function: Dynamic Model Discovery & Safe API Call ---
 @st.cache_data(ttl=3600, show_spinner=False)
 def fetch_available_models(key):
@@ -93,13 +112,13 @@ themes_css = {
         "card_bg": "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)",
         "card_text": "white",
         "btn_bg": "linear-gradient(90deg, #2575fc 0%, #6a11cb 100%)",
-        "metric_val": "#2575fc",
+        "metric_val": "#25b4fc",
         "text": "#212529"
     },
     "Dark Mode": {
         "bg": "#0e1117",
         "card_bg": "linear-gradient(135deg, #1f2937 0%, #111827 100%)",
-        "card_text": "#f3f4f6",
+        "card_text": "#dee5ea",
         "btn_bg": "linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%)",
         "metric_val": "#60a5fa",
         "text": "#e5e7eb"
@@ -117,7 +136,7 @@ themes_css = {
         "card_bg": "linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%)",
         "card_text": "white",
         "btn_bg": "linear-gradient(90deg, #ff416c 0%, #ff4b2b 100%)",
-        "metric_val": "#ff416c",
+        "metric_val": "#ff41ad",
         "text": "#3d1e18"
     }
 }
